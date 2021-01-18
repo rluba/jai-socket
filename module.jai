@@ -198,7 +198,7 @@ SOL_KCM                  :: 281;
 SOL_TLS                  :: 282;
 SOL_XDP                  :: 283;
 
-SOL_SOCKET               :: 0x1;
+SOL_SOCKET               :: 0xffff;
 
 // IPX options
 IPX_TYPE                 :: 1;
@@ -209,7 +209,7 @@ IPX_TYPE                 :: 1;
  */
 SO_DEBUG                  :: 0x0001;		/* turn on debugging info recording */
 SO_ACCEPTCONN             :: 0x0002;		/* socket has had listen() */
-SO_REUSEADDR              :: 0x0002;		/* allow local address reuse */
+SO_REUSEADDR              :: 0x0004;		/* allow local address reuse */
 SO_KEEPALIVE              :: 0x0008;		/* keep connections alive */
 SO_DONTROUTE              :: 0x0010;		/* just use interface addresses */
 SO_BROADCAST              :: 0x0020;		/* permit sending of broadcast msgs */
