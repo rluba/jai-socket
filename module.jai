@@ -9,6 +9,8 @@ in_addr :: struct {
     s_addr     : u32;
 }
 
+INADDR_ANY : u32 : 0x00000000;
+
 sockaddr_in :: struct {
     sin_family : u16;     // Address family
     sin_port   : u16;     // Port number
