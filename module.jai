@@ -48,6 +48,7 @@ setsockopt :: (socket: s32, level: s32, option_name: s32, option_value: *void, o
 listen :: (sockfd: s32, backlog: int) -> s32 #foreign libc;
 connect :: (sockfd: s32, addr: *sockaddr, addrlen: *socklen_t) -> s32 #foreign libc;
 accept :: (sockfd: s32, addr: *sockaddr, addrlen: *socklen_t) -> s32 #foreign libc "accept";
+accept :: (sockfd: s32, addr: *sockaddr, addrlen: *socklen_t, flags: s32) -> s32 #foreign libc "accept";
 bind :: (sockfd: s32, addr: *sockaddr, addrlen: socklen_t) -> s32 #foreign libc;
 getsockname :: (sockfd: s32, addr: *sockaddr, addrlen: *socklen_t) -> s32 #foreign libc;
 
@@ -61,15 +62,15 @@ write :: inline (fd: s32, buf: string, args: ..Any) -> s64 {
 }
 
 
-accept :: (sockfd: s32, client: *sockaddr) -> s32 {
+accept :: (sockfd: s32, client: *sockaddr, flags: s32 = 0) -> s32 {
     clientlen : u32 = size_of(sockaddr);
-    return accept(sockfd, client, *clientlen);
+    return accept(sockfd, client, *clientlen, flags);
 }
 
-accept :: (sockfd: s32) -> s32, sockaddr_in {
+accept :: (sockfd: s32, flags: s32 = 0) -> s32, sockaddr_in {
     addr : sockaddr_in;
     addrlen : u32 = size_of(sockaddr);
-    fd := accept(sockfd, cast(*sockaddr)*addr, *addrlen);
+    fd := accept(sockfd, cast(*sockaddr)*addr, *addrlen, flags);
     return fd, addr;
 }
 
