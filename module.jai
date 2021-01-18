@@ -78,9 +78,9 @@ bind :: (socket : s32, address: string, port: u16, family: u16 = AF_INET) -> s32
     server_address.sin_family = family;
     // TODO: Eliminate inet_addr() call.
     addr := to_c_string(address);
+	defer free(addr);
     server_address.sin_addr = inet_addr(addr);
     server_address.sin_port = htons(port);
-    free(addr);
     return bind(socket, cast(*sockaddr)*server_address, size_of(sockaddr_in));
 }
 
